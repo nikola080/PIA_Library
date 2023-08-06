@@ -1,0 +1,14 @@
+.centar{
+    display: flex;
+    justify-content: center;
+}
+ .firstContainer{
+    background-color: lightgray;
+ }
+
+ .m100{
+    max-width: 200px;
+    max-height: 200px;
+    
+ }
+

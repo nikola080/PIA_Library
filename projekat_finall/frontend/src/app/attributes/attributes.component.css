@@ -1,0 +1,30 @@
+.center{
+    display: flex;
+    justify-content: center;
+}
+.toEnd{
+    display: flex;
+    justify-content: end;
+}
+.m100{
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.over {
+    white-space: nowrap;
+}
+
+.firstColor{
+    background-color: #F3FFB6;
+}
+.secondColor{
+    background-color: #99621E
+}
+.thirdColor {
+    background-color: #D38B5D;
+}
+.fourthColor{
+    background-color: #e3c58a;
+}
+

@@ -1,0 +1,192 @@
+
+
+<br> <br>
+
+<div class="row center">
+    <div class="col-sm-2">
+        <u  (click)="toFirstPage()">To first page</u>
+    </div>
+</div>
+
+<br>
+<div class="row center mb-2">
+    <div class="col-sm-1">
+        <button class = "btn firstButton" (click)="formOpened[0] = !formOpened[0]; formSubmited[0] = false;"> 
+            change
+        </button>
+    </div>
+
+    <div class="col-sm-3 d-flex align-items-center" >       
+        {{placeholders[0]}}       
+    </div>
+</div>
+<div class="row center mb-2" *ngIf = "formOpened[0]">
+    <div class="col-sm-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Change name" [(ngModel)] = "addName" [ngClass] = "formSubmited[0] ? (wrongInput[0] === '' ?'border border-success' : 'border border-danger') : ''">
+            <div class="input-group-append">
+              <button class="btn secondButton" type="button" (click)="addNewBook('name'); formSubmited[0] = true">ChangeName</button>
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="row center mb-2">
+    <div class="col-sm-1">
+        <button class = "btn firstButton" (click)="formOpened[1] = !formOpened[1];formSubmited[1] = false;"> 
+            change
+        </button>
+    </div>
+
+    <div class="col-sm-3 d-flex align-items-center" >       
+        <span class="over">
+            {{placeholders[1]}}   
+        </span>   
+    </div>
+</div>
+<div class="row center mb-2" *ngIf = "formOpened[1]">
+    <div class="col-sm-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Change authors" [(ngModel)] = "addAuthors" [ngClass] = "formSubmited[1] ? (wrongInput[1] === '' ?'border border-success' : 'border border-danger') : ''">
+            <div class="input-group-append">
+              <button class="btn secondButton" type="button" (click)="addNewBook('authors'); formSubmited[1] = true">ChangeAuthors</button>
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="row center mb-2">
+    <div class="col-sm-1">
+        <button class = "btn firstButton" (click)="formOpened[2] = !formOpened[2];formSubmited[2] = false;"> 
+            change
+        </button>
+    </div>
+
+    <div class="col-sm-3 d-flex align-items-center" >       
+        {{placeholders[2]}}       
+    </div>
+</div>
+<div class="row center mb-2" *ngIf = "formOpened[2]">
+    <div class="col-sm-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Change name" [(ngModel)] = "addGenre" [ngClass] = "formSubmited[2] ? (wrongInput[2] === '' ?'border border-success' : 'border border-danger') : ''">
+            <div class="input-group-append">
+              <button class="btn secondButton" type="button" (click)="addNewBook('genre'); formSubmited[2] = true">ChangeGenre</button>
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="row center mb-2">
+    <div class="col-sm-1">
+        <button class = "btn firstButton" (click)="formOpened[3] = !formOpened[3];formSubmited[3] = false;"> 
+            change
+        </button>
+    </div>
+
+    <div class="col-sm-3 d-flex align-items-center" >       
+        {{placeholders[3]}}       
+    </div>
+</div>
+<div class="row center mb-2" *ngIf = "formOpened[3]">
+    <div class="col-sm-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Change publihser" [(ngModel)] = "addPublisher" [ngClass] = "formSubmited[3] ? (wrongInput[3] === '' ?'border border-success' : 'border border-danger') : ''">
+            <div class="input-group-append">
+              <button class="btn secondButton" type="button" (click)="addNewBook('publisher'); formSubmited[3] = true">ChangePublihser</button>
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="row center mb-2">
+    <div class="col-sm-1">
+        <button class = "btn firstButton" (click)="formOpened[4] = !formOpened[4];formSubmited[4] = false;"> 
+            change
+        </button>
+    </div>
+
+    <div class="col-sm-3 d-flex align-items-center" >       
+        {{placeholders[4]}}       
+    </div>
+</div>
+<div class="row center mb-2" *ngIf = "formOpened[4]">
+    <div class="col-sm-4">
+        <div class="input-group">
+            <input type="number" class="form-control" placeholder="Change publishing year" [(ngModel)] = "addPublishingYear" [ngClass] = "formSubmited[4] ? (wrongInput[4] === '' ?'border border-success' : 'border border-danger') : ''">
+            <div class="input-group-append">
+              <button class="btn secondButton" type="button" (click)="addNewBook('publishingYear'); formSubmited[4] = true">ChangePublishingYear</button>
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="row center mb-2">
+    <div class="col-sm-1">
+        <button class = "btn firstButton" (click)="formOpened[5] = !formOpened[5];formSubmited[5] = false;"> 
+            change
+        </button>
+    </div>
+
+    <div class="col-sm-3 d-flex align-items-center" >       
+        {{placeholders[5]}}       
+    </div>
+</div>
+<div class="row center mb-2" *ngIf = "formOpened[5]">
+    <div class="col-sm-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Change language" [(ngModel)] = "addLanguage" [ngClass] = "formSubmited[5] ? (wrongInput[5] === '' ?'border border-success' : 'border border-danger') : ''">
+            <div class="input-group-append">
+              <button class="btn secondButton" type="button" (click)="addNewBook('language'); formSubmited[5] = true">ChangeLanguage</button>
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="row center mb-2">
+    <div class="col-sm-1">
+        <button class = "btn firstButton" (click)="formOpened[6] = !formOpened[6];formSubmited[6] = false;"> 
+            change
+        </button>
+    </div>
+
+    <div class="col-sm-3 d-flex align-items-center" >       
+        {{placeholders[6]}}       
+    </div>
+</div>
+<div class="row center mb-2" *ngIf = "formOpened[6]">
+    <div class="col-sm-4">
+        <div class="input-group">
+            <input type="number" class="form-control" placeholder="Change number of copies" [(ngModel)] = "addAmount" [ngClass] = "formSubmited[6] ? (wrongInput[6] === '' ?'border border-success' : 'border border-danger') : ''">
+            <div class="input-group-append">
+              <button class="btn secondButton" type="button" (click)="addNewBook('amount'); formSubmited[6] = true">ChangeAmount</button>
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="row center mb-2">
+    <div class="col-sm-1 d-flex align-items-center">
+        <button class = "btn firstButton" (click)="formOpened[7] = !formOpened[7]"> 
+            change
+        </button>
+    </div>
+
+    <div class="col-sm-2 d-flex align-items-center" >       
+        Current picture : 
+    </div>
+    <div class="col-sm-1 d-flex align-items-center" >       
+       <img [src]="'/assets/' + book.picture" class = "m100 rounded" > 
+    </div>
+</div>
+<div class="row center mb-2" *ngIf = "formOpened[7]">
+    <div class="col-sm-4">
+        <div class="input-group">
+            <input type="file" accept = "image/png, image/jpeg" class="form-control" placeholder="Change picture"  (change) = "bookPictureImage($event)" name = 'bookPicture' >
+            <div class="input-group-append">
+              <button class="btn secondButton" type="button" (click)="addNewBook('picture')">ChangePicture</button>
+            </div>
+          </div>
+    </div>
+</div>
+

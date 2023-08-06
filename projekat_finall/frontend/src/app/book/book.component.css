@@ -1,0 +1,27 @@
+.center{
+    display:flex;
+    justify-content: center;
+}
+
+.m300{
+    max-height: 480px;
+    max-width: 300px;
+    width: 100%;
+}
+
+.m80{
+    max-height: 60px;
+    max-width: 60px;
+   
+}
+
+.button_color{
+    background-color: #e71d36 !important;
+}
+.reserve_btn {
+    background-color: #011627 !important;
+}
+
+.border_color_img{
+    border-color: #011627 !important;
+}

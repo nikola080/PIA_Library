@@ -1,0 +1,260 @@
+<br>
+<a (click) = "toFirstPage()" style="color:#E3C58A" class = "center">To first page</a>
+<br>
+<div class = "row center">
+    <div class="col-sm-3">
+        <p style="text-align: center" class = "thirdColor rounded">To change attributes click on "change" button to open a form!</p>
+    </div>
+</div>
+<div class="row center mb-2">
+    <div class="col-sm-1 offset-1">
+        <button class = "btn firstColor" (click) = "wantUsername = !wantUsername; username_err = ''">change</button>
+    </div>
+    <div class="col-sm-4 d-flex align-items-center">
+        Current username : {{user.username}}
+    </div>
+
+</div>
+
+
+<div *ngIf = "wantUsername" class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over">New username :</div>
+    </div>
+    <div class="col-sm-2">
+        <input type="text" [(ngModel)] = "username">
+    </div>
+    <div class="col-sm-2">
+        <button class="btn secondColor" (click)="changeInputs('username') ">ChangeUsername</button>
+    </div>
+</div>
+<div *ngIf = "username_err != '' " class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over text-danger"> {{username_err}} </div>
+    </div>
+</div>
+
+
+<div class="row center mb-2">
+    <div class="col-sm-1 offset-1">
+        <button class = "btn firstColor" (click) = "wantFirstname = !wantFirstname; firstName_err = ''">change</button>
+    </div>
+    <div class="col-sm-4 d-flex align-items-center">
+        Current firstname : {{user.firstName}}
+    </div>
+</div>
+
+<div *ngIf = "wantFirstname" class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over">New firstname :</div> 
+    </div>
+    <div class="col-sm-2">
+        <input type="text" [(ngModel)]="firstName">
+    </div>
+    <div class="col-sm-2">
+        <button class="btn secondColor" (click)="changeInputs('firstName')">ChangeFirstname</button>
+    </div>
+</div>
+<div *ngIf = "firstName_err != '' " class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over text-danger"> {{firstName_err}} </div>
+    </div>
+</div>
+
+<div class="row center mb-2">
+    <div class="col-sm-1 offset-1">
+        <button class = "btn firstColor" (click) = "wantLastname = !wantLastname; lastName_err = ''">change</button>
+    </div>
+    <div class="col-sm-4 d-flex align-items-center">
+        Current lastname : {{user.lastName}}
+    </div>
+</div>
+<div *ngIf = "wantLastname" class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over">New lastname :</div>
+    </div>
+    <div class="col-sm-2">
+        <input type="text" [(ngModel)]="lastName">
+    </div>
+    <div class="col-sm-2">
+        <button class="btn secondColor" (click)="changeInputs('lastName')">ChangeLastname</button>
+    </div>
+</div>
+<div *ngIf = "lastName_err != '' " class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over text-danger"> {{lastName_err}} </div>
+    </div>
+</div>
+
+<div class="row center mb-2">
+    <div class="col-sm-1 offset-1">
+        <button class = "btn firstColor" (click) = "wantAdress = !wantAdress; adress_err = ''">change</button>
+    </div>
+    <div class="col-sm-4 d-flex align-items-center">
+        Current adress : {{user.adress}}
+    </div>
+</div>
+<div *ngIf = "wantAdress" class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over">New adress :</div>
+    </div>
+    <div class="col-sm-2">
+        <input type="text" [(ngModel)]="adress">
+    </div>
+    <div class="col-sm-2">
+        <button class="btn secondColor" (click)="changeInputs('adress')">ChangeLastname</button>
+    </div>
+</div>
+<div *ngIf = "adress_err != '' " class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over text-danger"> {{adress_err}} </div>
+    </div>
+</div>
+
+
+
+<div class="row center mb-2">
+    <div class="col-sm-1 offset-1">
+        <button class = "btn firstColor" (click) = "wantPhone = !wantPhone; phone_err = ''">change</button>
+    </div>
+    <div class="col-sm-4 d-flex align-items-center">
+        Current phone : {{user.phone}}
+    </div>
+</div>
+<div *ngIf = "wantPhone" class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over">New phone :</div>
+    </div>
+    <div class="col-sm-2">
+        <input type="text" [(ngModel)]="phone">
+    </div>
+    <div class="col-sm-2">
+        <button class="btn secondColor" (click)="changeInputs('phone')">ChangePhone</button>
+    </div>
+</div>
+<div *ngIf = "phone_err != '' " class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over text-danger"> {{phone_err}} </div>
+    </div>
+</div>
+
+
+<div class="row center mb-2">
+    <div class="col-sm-1 offset-1">
+        <button class = "btn firstColor" (click) = "wantEmail = !wantEmail; email_err = ''">change</button>
+    </div>
+    <div class="col-sm-4 d-flex align-items-center">
+       Current e-mail : {{user.email}} 
+    </div>
+</div>
+<div *ngIf = "wantEmail" class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over">New e-mail :</div>
+    </div>
+    <div class="col-sm-2">
+        <input type="text" [(ngModel)]="email">
+    </div>
+    <div class="col-sm-2">
+        <button class="btn secondColor" (click)="changeInputs('email')">ChangeEmail</button>
+    </div>
+</div>
+<div *ngIf = "email_err != '' " class="row mb-2">
+    <div class="col-sm-1 offset-4">
+        <div class="over text-danger"> {{email_err}} </div>
+    </div>
+</div>
+
+
+
+<div class="row center mb-2">
+    <div class="col-sm-1 offset-1 d-flex align-items-strech">
+        <button class = "btn firstColor" (click) = "wantPicture = !wantPicture">change</button>
+    </div>
+    <div class="col-sm-4 d-flex align-items-center">
+        Current profile picture : <img [src]="pictureURL" class = "m100">
+    </div>
+</div>
+
+<div *ngIf = "wantPicture" class="row mb-4">
+    <div class="col-sm-1 offset-4">
+        <div class="over">New picture:</div> 
+    </div>
+    <div class="col-sm-2">
+        <input type="file" accept = "image/png, image/jpeg" (change) = "profilePictureImage($event)" name = 'profilePicture'>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn secondColor" (click) = "changeInputs('picture')">ChangePicture</button>
+    </div>
+</div>
+
+
+
+<div class = "row center">
+    <div class="col-sm-3">
+        <p style="text-align: center" class = "thirdColor rounded">For changing the password click on the button bellow!</p>
+    </div>
+</div>
+
+<div class="row center mb-3">
+    <div class="col-sm-1">
+        <button (click) = 'wantPassword = !wantPassword' class = "btn firstColor">
+            change
+        </button> 
+    </div>
+</div>
+
+
+<div *ngIf = "wantPassword">
+    <div class="row center d-flex align-items-center mb-2">
+        <div class="col-sm-2">
+            Old password:
+        </div>
+        <div class="col-sm-2">
+            <input type="password" [(ngModel)]="oldPassword">
+        </div>
+    </div>
+    <div *ngIf = "oldPassword_err != ''" class="row  mb-2">
+        <div class="col-sm-3 offset-4 text-danger">
+            {{oldPassword_err}}
+        </div>
+    </div>
+
+    <div class="row center d-flex align-items-center mb-2">
+        <div class="col-sm-2">
+            New password:
+        </div>
+        <div class="col-sm-2">
+            <input type="password" [(ngModel)]="newPassword">
+        </div>
+    </div>
+    <div *ngIf = "newPassword_err != ''" class="row  mb-2">
+        <div class="col-sm-5 offset-4 text-danger">
+            {{newPassword_err}}
+        </div>
+    </div>
+
+    <div class="row center d-flex align-items-center mb-2">
+        <div class="col-sm-2 ">
+            Repeated new password:
+        </div>
+        <div class="col-sm-2">
+            <input type="password" [(ngModel)]="repeatNewPassword">
+        </div>
+    </div>
+    <div *ngIf = "repeatNewPassword_err != ''" class="row  mb-2">
+        <div class="col-sm-3 offset-4 text-danger">
+            {{repeatNewPassword_err}}
+        </div>
+    </div>
+
+    <div class="row center">
+        <div class="col-sm-2 d-flex justify-content-center">
+            <button class = "btn secondColor" (click)="changePassword()">
+                ChangePassword
+            </button>
+        </div>
+    </div>
+    
+</div>
+
+<br><br><br>

@@ -1,0 +1,29 @@
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.over {
+    white-space: nowrap;
+}
+
+
+.firstButton{
+    background-color: #511730;
+    color: whitesmoke;
+}
+
+.secondButton {
+    background-color: #320a28;
+    color: whitesmoke; 
+}
+
+.thirdButton {
+    background-color: #8e443d;
+    color: whitesmoke; 
+}
+
+.m100{
+    max-height: 100px;
+    max-width: 100px;
+}

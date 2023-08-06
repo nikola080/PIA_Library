@@ -1,0 +1,405 @@
+
+<br>
+<div class="row centar" *ngIf="booksInd != 0">
+    <div class="col-sm-5">
+        <h2 style="text-align: center;">Top {{booksInd}} books</h2>
+    </div>
+</div>
+<div class="row centar d-flex" *ngIf="booksInd != 0">
+    <div class="col-sm-1 d-flex justify-content-center">
+        <button class = 'btn btn-primary align-self-stretch ' (click)="previousSlide()">prev</button>
+    </div>
+    
+    <div class="col-sm-2 border border-primary ">
+        <div class="row">
+            <div class="col-sm-12">
+                <img [src]="'/assets/' +  books[imageInd].picture" alt="" class = 'm100  flex-grow-1'>
+            </div>          
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                 <span style="text-align: center;">
+                    Name of the book : {{books[imageInd].name}}
+                </span>
+                 
+            </div>    
+           
+        </div>
+        
+    </div>
+
+    <div class="col-sm-1 d-flex justify-content-center">
+        <button class = 'btn btn-primary align-self-stretch ' (click)="nextSlide()">next</button>
+    </div>
+</div>
+
+
+<br>
+
+<div class="row">
+    <div class = 'col-sm-6 rounded firstContainer' >
+        <div class="row centar">       
+            <div class="col-sm-3">
+                <p style="font-size: 24px;">Registration</p>
+            </div>
+        </div>
+    
+        <div class="row centar">
+            
+            <div class="col-sm-2">
+                Username:
+            </div>
+            <div class="col-sm-4">
+                <input type="text" [(ngModel)] = 'username'>
+            </div>
+            
+        </div>
+        <div class="row ">
+            <div class="col-sm-6 offset-sm-3">
+                <div class = 'text-danger' *ngIf = "er_username != ''; else br">
+                    {{er_username}} 
+                </div>
+                
+            </div>  
+                
+        </div>
+        <ng-template #br> <br> </ng-template>
+    
+        <div class="row centar">
+            <div class="col-sm-2">
+                Password: 
+            </div>
+            <div class="col-sm-4">
+                <input type="password" [(ngModel)] = 'password'>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-6 offset-sm-3 text-danger">
+                <div *ngIf = "er_password != ''; else br">
+                    {{er_password}}
+                </div>
+                
+            </div>        
+        </div>
+        <ng-template #br> <br> </ng-template>
+        
+        <div class="row centar">
+            <div class="col-sm-2">
+                Firstname: 
+            </div>
+            <div class="col-sm-4">
+                <input type="text" [(ngModel)] = 'firstName'>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-6 offset-sm-3 text-danger">
+                <div *ngIf = "er_firstName != ''; else br">
+                    {{er_firstName}}
+                </div>
+                
+            </div>        
+        </div>
+        <ng-template #br> <br> </ng-template>
+        
+        <div class="row centar">
+            <div class="col-sm-2">
+                Lastname: 
+            </div>
+            <div class="col-sm-4">
+                <input type="text" [(ngModel)] = 'lastName'>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-6 offset-sm-3 text-danger">
+                <div *ngIf = "er_lastName != ''; else br">
+                    {{er_lastName}}
+                </div>
+                
+            </div>        
+        </div>
+        <ng-template #br> <br> </ng-template>
+        
+        <div class="row centar">
+            <div class="col-sm-2">
+                Adress: 
+            </div>
+            <div class="col-sm-4">
+                <input type="text" [(ngModel)] = 'adress'>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-6 offset-sm-3 text-danger">
+                <div *ngIf = "er_adress != ''; else br">
+                    {{er_adress}}
+                </div>
+                
+            </div>        
+        </div>
+        <ng-template #br> <br> </ng-template>
+        
+        <div class="row centar">
+            <div class="col-sm-2">
+                Phone: 
+            </div>
+            <div class="col-sm-4">
+                <input type="text" [(ngModel)] = 'phone'>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-6 offset-sm-3 text-danger">
+                <div *ngIf = "er_phone != ''; else br">
+                    {{er_phone}} 
+                </div>
+                
+            </div>        
+        </div>
+        <ng-template #br> <br> </ng-template>
+        
+        <div class="row centar">
+            <div class="col-sm-2">
+                E-mail: 
+            </div>
+            <div class="col-sm-4">
+                <input type="email" [(ngModel)] = 'email'>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-6 offset-sm-3 text-danger">
+                <div *ngIf = "er_email != ''; else br">
+                    {{er_email}}
+                </div>
+                
+            </div>        
+        </div>
+        <ng-template #br> <br> </ng-template>
+        
+        <div class="row centar">
+            <div class="col-sm-2">
+                Picture: 
+            </div>
+            <div class="col-sm-4">
+                <input type="file" accept="image/png, image/jpg" (change) = "profilePictureImage($event)" name = 'profilePicture'>
+            </div>
+        </div>
+        <br>
+        <div class="row centar">
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary" (click) = 'register()'> register </button>
+            </div>
+        </div>
+        <br>
+
+    </div>
+    
+
+    <div class = 'offset-lg-1 col-sm-5 rounded firstContainer align-self-start'>
+        <div class="row centar">
+            <div class="col-sm-3">
+                <p style="font-size: 24px;">Login</p>
+            </div>
+        </div>
+    
+        <div class="row centar">
+            <div class="col-sm-2">
+                Username: 
+            </div>
+           
+            <div class="col-sm-3 offset-sm-1">
+                <input type="text" [(ngModel)] = 'l_username'>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-10 offset-sm-2 text-danger">
+                <div *ngIf = "er_l_username != ''; else br">
+                    {{er_l_username}}
+                </div>      
+            </div>        
+        </div>
+        <ng-template #br> <br> </ng-template>
+    
+        <div class="row centar">
+            <div class="col-sm-2">
+                Password: 
+            </div>
+            <div class="col-sm-3 offset-sm-1">
+                <input type="password" [(ngModel)] = 'l_password'>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-10 offset-sm-2 text-danger">
+                <div *ngIf = "er_l_password != ''; else br">
+                    {{er_l_password}}
+                </div>      
+            </div>        
+        </div>
+        <ng-template #br> <br> </ng-template>
+        
+        <div class="row centar">
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-primary" (click) = 'logIn()'> Login </button>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+
+<br><br>
+
+
+<div class="row centar mb-3">
+    <div class="col-sm-2">
+        Choose the type of search :
+    </div>
+    <div class="col-sm-1">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check0" (change)="byName = !byName">
+            <label class="form-check-label" for="check0">Name</label>
+        </div>
+    </div>
+    <div class="col-sm-1">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check1" (change)="byAuthor = !byAuthor">
+            <label class="form-check-label" for="check1">Author</label>
+        </div>
+    </div>
+    <div class="col-sm-1">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check2" (change)="byGenre = !byGenre">
+            <label class="form-check-label" for="check2">Genre</label>
+        </div>
+    </div>
+    <div class="col-sm-1">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check3" (change)="byPublisher = !byPublisher">
+            <label class="form-check-label" for="check3">Publisher</label>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check4" (change)="byYear = !byYear">
+            <label class="form-check-label" for="check4">Year of publishing</label>
+        </div>
+    </div>
+</div>
+
+<div class="row centar " *ngIf="byName">
+    <div class="col-sm-6">
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" placeholder="Insert name of the book" aria-label="Search"
+                aria-describedby="basic-addon2" [(ngModel)]="s_name">
+        </div>
+    </div>
+</div>
+
+<div class="row centar " *ngIf="byAuthor">
+    <div class="col-sm-6">
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" placeholder="Insert name(s) of author(s), eg. (author1,author2...)"
+                aria-label="Search" aria-describedby="basic-addon2" [(ngModel)]="s_authors">
+
+        </div>
+    </div>
+</div>
+
+<div class="row centar d-flex" *ngIf="byGenre">
+    <div class="col-sm-6">
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="selectForm">Choose genre</label>
+            </div>
+            <select class="custom-select flex-grow-1" id="selectForm" [(ngModel)]="s_genre">
+                <option selected> </option>
+                <option *ngFor='let genre of genres'>{{genre}}</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+
+<div class="row centar " *ngIf="byPublisher">
+    <div class="col-sm-6">
+
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" placeholder="Insert publisher" aria-label="Search"
+                aria-describedby="basic-addon2" [(ngModel)]="s_publihser">
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row centar " *ngIf="byYear">
+    <div class="col-sm-3">
+        <div class="input-group mb-2">
+            <input type="number" class="form-control" placeholder="Year from " aria-label="Search"
+                aria-describedby="basic-addon2" [(ngModel)]="s_year_from">
+
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group mb-2">
+            <input type="number" class="form-control" placeholder="Year to " aria-label="Search"
+                aria-describedby="basic-addon2" [(ngModel)]="s_year_to">
+
+        </div>
+    </div>
+</div>
+
+<div class="row centar mb-6" *ngIf="byName || byAuthor || byGenre || byPublisher || byYear">
+    <div class="col-sm-6 ">
+        <button class="btn btn-primary col-sm-12 " (click)="searchBooks()">search</button>
+    </div>
+</div>
+<br>
+<div *ngIf="searchedFlag" class="row centar mb-3">
+    <div class="col-sm-4 bg-primary rounded d-flex justify-content-center" style="color:white">Search result:</div>
+</div>
+
+
+<div *ngIf="searchedBooks != null">
+
+    <div class="row centar " *ngFor="let book of searchedBooks" >
+        <div class="col-md-6">
+            <div class="card mb-3 border border-primary">
+                <div class="row no-gutters" >
+                    <div class="col-md-4 d-flex">
+                        <img [src]="'/assets/' + book.picture " class="img-fluid rounded-start  flex-grow-1 " alt="">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+
+
+                            <p>
+                                Name of the book: {{book.name}}
+                            </p>
+                            <p>
+                                Authors:
+                            </p>
+
+                            <ul>
+                                <li *ngFor='let author of book.authors'>
+                                    {{author}}
+                                </li>
+                            </ul>
+                            <p>
+                                Genre : {{book.genre}}
+                            </p>
+                            <p>
+                                Books left : {{book.amount}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<br><br>

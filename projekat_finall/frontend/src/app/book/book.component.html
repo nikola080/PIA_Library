@@ -1,0 +1,231 @@
+<br>
+
+
+
+<div class="row center">
+    <div class="col-sm-2 offset-2">
+        <u  style="color: #011627;" (click)="toFirstPage()">
+            To first page
+        </u> 
+    </div>
+
+    <div class="col-sm-2">
+        
+        
+        <u  style="color: #011627;" (click)="logout()">
+            Logout
+        </u>
+    </div>
+</div>
+
+<br>
+<div class="row center">
+    <div class="col-sm-3 border  border_color_img rounded offset-2 d-flex" (click)="goToChangeAttr()"   >
+        <img [src]="myBookUrl" alt="/assets/book_default.jpg" class = "m300 rounded-start " >
+    </div>
+    
+    <div class="col-sm-6 rounded d-flex flex-column align-content-center justify-content-center" style="background-color:#e71d36 ;">
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                Name : {{myBook.name}}
+            </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                Authors : 
+                
+                <ul>
+                    <li *ngFor="let author of myBook.authors"> {{author}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                Genre : {{myBook.genre}}
+            </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                Publisher : {{myBook.publisher}}
+            </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                Publishing year : {{myBook.publishingYear}}
+            </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                Language : {{myBook.language}}
+            </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                Copies left : {{myBook.amount}}
+            </div>
+        </div>
+        <div class="row mb-1" *ngIf = "user.blocked === '0' && returned">
+            <div class="col-sm-12">
+                Rate this book : <ngb-rating  [max] = "10" [(ngModel)]="currentRate" (click) = "submitRating()"></ngb-rating>
+            </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                Average rating : {{averageRating == null ? 0 : averageRating.toFixed(2)}}
+            </div>
+        </div>
+        <div class="row mb-1" >
+            <div class="col-sm-2"  *ngIf = "user.blocked === '0' && !borrowed && !reserved && myBook.amount != 0">
+               <button class = "btn reserve_btn" style="color: white;" (click) = "borrowBook()">borrow</button>
+            </div>
+            <div class="col-sm-2"  *ngIf = "user.blocked === '0' && !reserved && !borrowed && myBook.amount == 0">
+                <button class = "btn reserve_btn" style="color: white;" (click) = "reserveBook()">reserve</button>
+             </div>
+             <div class="col-sm-2"  *ngIf = "borrowed">
+                <button class = "btn reserve_btn" style="color: white;" (click) = "returnBook()">return</button>
+             </div>
+        </div>
+
+        <div class="row mb-1" *ngIf = "borrowedMoreThanThree">
+            <div class="col-sm-5">
+                You have already borrowed and reserved more than 3 books!
+            </div>
+            
+        </div>
+        <div class="row mb-1" *ngIf = "expiredReturn">
+            <div class="col-sm-2">
+                You havent return at least 1 book on time!
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+<br><br>
+
+<div *ngIf = "user.blocked === '0'">
+    <div  *ngIf = 'returned; else borrowedd'>
+        <div class="row center offset-2 d-flex rounded-top" style="background-color: #011627;">
+            <div class="col-sm-12 ">
+                <div class="row d-flex flex-direction-row flex-grow-1">
+                    <div class="col-sm-1 ml-2 my-2">
+                        <img [src]="userPictureUrl" alt="" class = "m80 rounded-circle ">
+                    </div>
+                    <div class="col-sm-1 d-flex align-items-center" style="color:#fdfffc ;">
+                        {{user.username}}
+                    </div>
+        
+                    <div class="col-sm-4 offset-6 d-flex flex-shrink-1 ">
+                        <div class="col-sm-12 d-flex align-content-center mt-2 justify-content-end">
+                            <button class="btn  button_color" (click)="submitComment()">comment</button>
+                        </div>
+                       
+                    </div>
+                   
+                </div>
+        
+            </div>
+        
+        
+        </div>
+        
+        <div class="row offset-2 d-flex flex-direction-row justify-content-end rounded-bottom" style="background-color: #011627;">
+            
+            <div class="col-sm-11  fluid">
+                <div class=" row input-group  mx-1 my-3">
+                    <textarea class="form-control" placeholder="Insert comment on this book" rows="3" style="resize: none;" maxlength="1000"  [(ngModel)]="comment"></textarea>
+                </div>
+                <div class="row mx-1 my-3" style="color:#fdfffc ;" *ngIf="emptyComment">
+                    Cannot submit empty comment!
+                </div>
+                <div class="row mx-1 my-3" style="color:#fdfffc ;" *ngIf="commentTwice">
+                    Cannot comment twice on same book, editing is enabled!
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <ng-template #borrowedd>
+        <h3 style="text-align: center;">Only users who read this book can commentate!</h3>
+    </ng-template>
+    <br>
+    
+    <h3 style="text-align: center;">Comments and rating on book : {{myBook.name}}</h3>
+    <br>
+    <h2 style="text-align: center;" *ngIf = "noCommentsFound">There are no comments for this book!</h2>
+    
+    <div *ngFor="let critique of commentsAndRatings;let ind = index">
+        <div class="row center offset-2 d-flex rounded-top" style="background-color: #011627;" >
+            <div class="col-sm-12 ">
+                <div class="row d-flex flex-direction-row flex-grow-1">
+                    <div class="col-sm-1 ml-2 my-2">
+                        <img [src]="'/assets/' + users[ind].picture" alt="" class = "m80 rounded-circle ">
+                    </div>
+                    <div class="col-sm-1 d-flex align-items-center" style="color:#fdfffc ;">
+                        {{users[ind].username}}
+                    </div>
+                    <div class="col-sm-2 d-flex align-items-center" style="color:#fdfffc ;">
+                        {{critique.date.toISOString().slice(0,19)}}
+                    </div>
+                    <div class="col-sm-1 d-flex align-items-center" style="color:#fdfffc ;" *ngIf = "critique.edited == '1'">
+                        <i style="color:fdfffc ;">edited</i>
+                    </div>
+                    
+                    <div class="col-sm-5 offset-2 d-flex flex-direction-row justify-content-end" [ngClass]="critique.edited == '1'?'offset-2' : 'offset-3'">
+                        
+                        <div class="col-sm-8 d-flex align-self-center mt-2" *ngIf="(critique.rating != null)">
+                           <span  style="color:#fdfffc ;">Given rating: {{critique.rating}}</span>
+                        </div>
+                        <div class="col-sm-8 d-flex align-self-center mt-2 " *ngIf="(critique.rating == null)">
+                            
+                                <span  style="color:#fdfffc ;">This user has not yet given a rating</span>
+                            
+                        </div>
+                      
+                        <div class="col-sm-2 mr-2 d-flex align-content-center mt-2 justify-content-end" *ngIf = "user.username == users[ind].username">
+                            <button class="btn  button_color" (click)="wantToEdit = !wantToEdit; !wantToEdit?emptyCommentEdited = false:1">edit</button>
+                        </div>
+                        <div class="col-sm-2 d-flex align-content-center mt-2 justify-content-end" *ngIf = "user.username == users[ind].username">
+                            <button class="btn  button_color" (click)="editComment()">save</button>
+                        </div>
+                       
+                    </div>
+                   
+                </div>
+        
+            </div>
+        
+        
+        </div>
+        
+        <div class="row offset-2 d-flex flex-direction-row justify-content-end rounded-bottom" style="background-color: #011627;">
+            
+            <div class="col-sm-11  fluid">
+                <div class=" row fluid input-group  rounded mx-1 my-3" style="background-color: #FFFFFF;"*ngIf="user.username  != users[ind].username || !wantToEdit">
+              
+                    <div  *ngIf="user.username  != users[ind].username || !wantToEdit" style="word-wrap:break-word;">
+                        <p>{{critique.comment}}</p>
+                        
+                    </div>
+                    
+                </div>
+    
+                <div class=" row fluid input-group  rounded mx-1 my-3" style="background-color: #FFFFFF;"*ngIf="user.username == users[ind].username && wantToEdit">
+                    
+                        <textarea   class="form-control " [placeholder] =  "critique.comment" rows="3" style="resize: none;" maxlength="1000"  [(ngModel)]="commentEdited" ></textarea>
+                        
+                </div>
+                <div class="row mx-1 my-3" style="color:#fdfffc ;" *ngIf="emptyCommentEdited; ">
+                    Cannot submit empty comment!
+                </div>
+               
+            </div>
+        </div>
+    
+        <br>
+    </div>
+    
+</div>
+
+

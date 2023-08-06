@@ -1,0 +1,536 @@
+<br>
+
+<div class="row centar" style="background-color: #ccd6eb;">
+    <div class="col-sm-1">
+        <a (click)="toFirstPage()" style="color:#320a28" class="centar over">To first page</a>
+    </div>
+    <div class="col-sm-1">
+        <a (click)="logOut()" style="color:#320a28" class="centar over">Logout</a>
+    </div>
+    <div class="col-sm-2">
+        <a (click)="getHistoryBorrowed()" style="color:#320a28" class="centar over">History of borrowed books</a>
+    </div>
+</div>
+<br>
+
+
+
+<div class="row centar " *ngIf = "bookOfTheDay">
+    <div class="col-md-5">
+        <div class="card mb-3" (click) = "navigateToBook(bookOfTheDay)">
+            <div class="row no-gutters">
+                <div class="col-md-4 d-flex">
+                    <img [src]="bookOfTheDayUrl" class="img-fluid rounded-start  flex-grow-1" alt="">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Book of the day</h5>
+
+                        <p>
+                            Name of the book: {{bookOfTheDay.name}}
+                        </p>
+                        <p>
+                            Authors:
+                        </p>
+
+                        <ul>
+                            <li *ngFor='let author of bookOfTheDay.authors'>
+                                {{author}}
+                            </li>
+                        </ul>
+                        <p>
+                            
+                            Average rating:  {{bookOfTheDayAvgRating == null ? 0 : bookOfTheDayAvgRating.toFixed(2)}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row centar mb-3">
+    <div class="col-sm-3">
+        <h3 style="text-align: center;">Notifications</h3>
+    </div>
+</div>
+
+
+<div class="row centar " *ngIf="user.blocked === '1'">
+    <div class="col-sm-6">
+        <h2 style="text-align: center;" class = "border border-dark">You have been blocked!</h2>
+    </div>
+</div>
+
+<div *ngIf = "user.blocked === '0'">
+    <div class="row centar" *ngIf = "acceptedBooks.length != 0">
+        <div class="col-sm-8">
+            <h3 style="text-align: center;">These book that you have suggested have been accepted moderator!</h3>
+        </div>
+        
+    </div>
+    <div class="row centar" *ngFor = "let data of acceptedBooks">
+        <div class="col-md-6">
+            <div class="card mb-3 border" [ngClass]="'border-success'" >
+                <div class="row no-gutters" >
+                    <div class="col-md-4 d-flex">
+                        <img [src]="'/assets/' + data.picture " class="img-fluid rounded-start  flex-grow-1 " alt="" (click) = "navigateToBook(data)">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p>
+                                Name of the book: {{data.name}}
+                            </p>   
+                            <p>
+                                Amount: {{data.amount}}
+                            </p>                     
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+    
+        </div>
+    </div>
+    
+    
+    <div class="row centar" *ngIf = "inTowDays.length != 0">
+        <div class="col-sm-6">
+            <h3 style="text-align: center;">These bororwings expire in less than 2 days!</h3>
+        </div>
+        
+    </div>
+    <div class="row centar" *ngFor = "let data of inTowDays">
+        <div class="col-md-6">
+            <div class="card mb-3 border" [ngClass]="'border-warning'" >
+                <div class="row no-gutters" >
+                    <div class="col-md-4 d-flex">
+                        <img [src]="'/assets/' + data.picture " class="img-fluid rounded-start  flex-grow-1 " alt="" (click) = "navigateToBook(data)">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p>
+                                Name of the book: {{data.name}}
+                            </p>   
+                            <p>
+                                Amount: {{data.amount}}
+                            </p>                     
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+    
+        </div>
+    </div>
+    
+    <div class="row centar" *ngIf = "expired.length != 0">
+        <div class="col-sm-6">
+            <h3 style="text-align: center;">These bororwings of these book are expired!</h3>
+        </div>
+        
+    </div>
+    <div class="row centar" *ngFor = "let data of expired">
+        <div class="col-md-6">
+            <div class="card mb-3 border" [ngClass]="'border-danger'" >
+                <div class="row no-gutters" >
+                    <div class="col-md-4 d-flex">
+                        <img [src]="'/assets/' + data.picture " class="img-fluid rounded-start  flex-grow-1 " alt="" (click) = "navigateToBook(data)">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p>
+                                Name of the book: {{data.name}}
+                            </p>   
+                            <p>
+                                Amount: {{data.amount}}
+                            </p>                     
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+    
+        </div>
+    </div>
+    
+    <div class="row centar" *ngIf = "hasThree">
+        <div class="col-sm-6">
+            <h3 class="border border-danger" style="text-align: center;">You have borrowed maximum of 3 books!</h3>
+        </div>
+        
+    </div>
+    
+    
+    <div class="row centar" *ngIf = "gotReseved.length != 0">
+        <div class="col-sm-8">
+            <h3 style="text-align: center;">Your reservation for these books has been proccessed!</h3>
+        </div>
+        
+    </div>
+    <div class="row centar" *ngFor = "let data of gotReseved">
+        <div class="col-md-6">
+            <div class="card mb-3 border" [ngClass]="'border-danger'" >
+                <div class="row no-gutters" >
+                    <div class="col-md-4 d-flex">
+                        <img [src]="'/assets/' + data.picture " class="img-fluid rounded-start  flex-grow-1 " alt="" (click) = "navigateToBook(data)">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p>
+                                Name of the book: {{data.name}}
+                            </p>   
+                            <p>
+                                Amount: {{data.amount}}
+                            </p>                     
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+
+<br>
+<div class="row centar mb-4">
+    <div class="col-sm-5 align-self-center "><span class="d-flex justify-content-end">To change profile attributes,
+            click on the profile picture</span> </div>
+    <div class="col-sm-2">
+        <img [src]="getUserPicture()" (click)="navigateToProfileAttributes()"
+            class="m100 rounded border border-primary">
+    </div>
+</div>
+
+<div class="obavestenja"></div>
+
+
+<div class="row centar mb-3">
+    <div class="col-sm-2">
+        Choose the type of search :
+    </div>
+    <div class="col-sm-1">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check0" (change)="byName = !byName">
+            <label class="form-check-label" for="check0">Name</label>
+        </div>
+    </div>
+    <div class="col-sm-1">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check1" (change)="byAuthor = !byAuthor">
+            <label class="form-check-label" for="check1">Author</label>
+        </div>
+    </div>
+    <div class="col-sm-1">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check2" (change)="byGenre = !byGenre">
+            <label class="form-check-label" for="check2">Genre</label>
+        </div>
+    </div>
+    <div class="col-sm-1">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check3" (change)="byPublisher = !byPublisher">
+            <label class="form-check-label" for="check3">Publisher</label>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check4" (change)="byYear = !byYear">
+            <label class="form-check-label" for="check4">Year of publishing</label>
+        </div>
+    </div>
+</div>
+
+<div class="row centar " *ngIf="byName">
+    <div class="col-sm-6">
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" placeholder="Insert name of the book" aria-label="Search"
+                aria-describedby="basic-addon2" [(ngModel)]="s_name">
+        </div>
+    </div>
+</div>
+
+<div class="row centar " *ngIf="byAuthor">
+    <div class="col-sm-6">
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" placeholder="Insert name(s) of author(s), eg. (author1,author2...)"
+                aria-label="Search" aria-describedby="basic-addon2" [(ngModel)]="s_authors">
+
+        </div>
+    </div>
+</div>
+
+<div class="row centar d-flex" *ngIf="byGenre">
+    <div class="col-sm-6">
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="selectForm">Choose genre</label>
+            </div>
+            <select class="custom-select flex-grow-1" id="selectForm" [(ngModel)]="s_genre">
+                <option selected> </option>
+                <option *ngFor='let genre of genres'>{{genre}}</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+
+<div class="row centar " *ngIf="byPublisher">
+    <div class="col-sm-6">
+
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" placeholder="Insert publisher" aria-label="Search"
+                aria-describedby="basic-addon2" [(ngModel)]="s_publihser">
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row centar " *ngIf="byYear">
+    <div class="col-sm-3">
+        <div class="input-group mb-2">
+            <input type="number" class="form-control" placeholder="Year from " aria-label="Search"
+                aria-describedby="basic-addon2" [(ngModel)]="s_year_from">
+
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group mb-2">
+            <input type="number" class="form-control" placeholder="Year to " aria-label="Search"
+                aria-describedby="basic-addon2" [(ngModel)]="s_year_to">
+
+        </div>
+    </div>
+</div>
+
+<div class="row centar mb-6" *ngIf="byName || byAuthor || byGenre || byPublisher || byYear">
+    <div class="col-sm-6 ">
+        <button class="btn btn-primary col-sm-12 " (click)="searchBooks()">search</button>
+    </div>
+</div>
+<br>
+<div *ngIf="searchedFlag" class="row centar mb-3">
+    <div class="col-sm-4 bg-primary rounded d-flex justify-content-center" style="color:white">Search result:</div>
+</div>
+
+
+<div *ngIf="searchedBooks != null">
+
+    <div class="row centar " *ngFor="let book of searchedBooks" >
+        <div class="col-md-6">
+            <div class="card mb-3 border border-primary" (click) = "navigateToBook(book)">
+                <div class="row no-gutters" >
+                    <div class="col-md-4 d-flex">
+                        <img [src]="'/assets/' + book.picture " class="img-fluid rounded-start  flex-grow-1 " alt="">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+
+
+                            <p>
+                                Name of the book: {{book.name}}
+                            </p>
+                            <p>
+                                Authors:
+                            </p>
+
+                            <ul>
+                                <li *ngFor='let author of book.authors'>
+                                    {{author}}
+                                </li>
+                            </ul>
+                            <p>
+                                Genre : {{book.genre}}
+                            </p>
+                            <p>
+                                Books left : {{book.amount}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<br>
+<div *ngIf="searchedBooks != null">
+    <div class="row centar mb-4">
+        <div class="col-sm-5 align-self-center "><span class="d-flex justify-content-end">To open or close form for requesting a
+                new book click on buttons : </span> </div>
+        <div class="col-sm-1">
+            <button class="btn btn-primary" (click)="formOpenAddBook = true">open </button>
+    
+        </div>
+    
+        <div class="col-sm-1">
+            <button class="btn btn-primary" (click)="formOpenAddBook = false; resetBookInputs()">close </button>
+        </div>
+    
+    </div>
+    
+    <div *ngIf="formOpenAddBook">
+        <div class="row centar ">
+            <div class="col-sm-6">
+                <div class="input-group mb-2" >
+                    <input type="text" class="form-control"   placeholder="Insert name of the book" [(ngModel)]="addName" [ngClass]="formSubmited ? (wrongInput[0] != '' ? 'border border-danger': 'border-success' ) : ''">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 offset-3 text-danger">
+                {{wrongInput[0]}}
+            </div>
+        </div>
+    
+        <div class="row centar ">
+            <div class="col-sm-6">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" [ngClass]="formSubmited ? (wrongInput[1] != '' ? 'border border-danger': 'border-success' ) : ''" placeholder="Insert name(s) of author(s), eg. (author1,author2...)" [(ngModel)]="addAuthors">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 offset-3 text-danger">
+                {{wrongInput[1]}}
+            </div>
+        </div>
+    
+        <div class="row centar ">
+            <div class="col-sm-6">
+                <div class="input-group mb-2" >
+                    <input type="text" class="form-control" placeholder="Insert genre of the book" [(ngModel)]="addGenre" [ngClass]="formSubmited ? (wrongInput[2] != '' ? 'border border-danger': 'border-success' ) : ''">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 offset-3 text-danger">
+                {{wrongInput[2]}}
+            </div>
+        </div>
+    
+        <div class="row centar ">
+            <div class="col-sm-6">
+                <div class="input-group mb-2"  >
+                    <input type="text" class="form-control" placeholder="Insert name of the publisher"
+                        [(ngModel)]="addPublisher" [ngClass]="formSubmited ? (wrongInput[3] != '' ? 'border border-danger': 'border-success' ) : ''">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 offset-3 text-danger">
+                {{wrongInput[3]}}
+            </div>
+        </div>
+    
+        <div class="row centar " >
+            <div class="col-sm-6">
+                <div class="input-group mb-2" >
+                    <input type="number" class="form-control" placeholder="Insert year of publishing"
+                        [(ngModel)]="addPublishingYear"[ngClass]="formSubmited ? (wrongInput[4] != '' ? 'border border-danger': 'border-success' ) : ''"> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 offset-3 text-danger">
+                {{wrongInput[4]}}
+            </div>
+        </div>
+    
+        <div class="row centar ">
+            <div class="col-sm-6">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Insert the language in which the book is written"
+                        [(ngModel)]="addLanguage"  [ngClass]="formSubmited ? (wrongInput[5] != '' ? 'border border-danger': 'border-success' ) : ''">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 offset-3 text-danger">
+                {{wrongInput[5]}}
+            </div>
+        </div>
+    
+    
+    
+        <div class="row centar d-flex mb-4">
+            <div class="col-sm-3 rounded">
+                <div class="custom-file " >
+                    <input type="file" accept = "image/png, image/jpeg" (change) = "bookPictureImage($event)" name = 'bookPicture'  class="custom-file-input"
+                    id="validatedCustomFile" [ngClass]="formSubmited? (addPicture  == null ? 'border border-danger' : 'border border-success') : ''">
+                 
+                </div>
+            </div>
+    
+            <div class="col-sm-3">
+                <label class="custom-file-label justify-content-end" for="validatedCustomFile">Insert picture of the
+                    book...</label>
+            </div>
+        </div>
+    
+        <div class="row centar " >
+            <div class="col-sm-6">
+                <button class = "btn btn-primary col-sm-12" (click)="addBook()">add book</button>
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+
+<div class="row centar">
+    <div class="col-sm-3">
+        <h2>Borrowed books</h2>
+    </div>
+    
+</div>
+
+<div class="row centar">
+    <div class="col-sm-5" *ngIf = "!borrowedBooks">
+        <h3>
+            You  have not borrowed any book yet!
+        </h3>
+        
+    </div>
+</div>
+
+<div *ngIf="borrowedBooks">
+    
+    <div class="row centar " *ngFor="let book of borrowedBooks; let ind = index;" >
+        <div class="col-md-6">
+            <div class="card mb-3 border" [ngClass]="passedDue[ind]?' border-danger':'border-success'" >
+                <div class="row no-gutters" >
+                    <div class="col-md-4 d-flex">
+                        <img [src]="'/assets/' + book.picture " class="img-fluid rounded-start  flex-grow-1 " alt="" (click) = "navigateToBook(book)">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+
+
+                            <p>
+                                Name of the book: {{book.name}}
+                            </p>
+                            <p>
+                               {{periodLeft[ind]}}
+                            </p>
+                            <button class = "btn btn-primary"  (click) = "extendBook(borrowed_ids[ind],ind)">extend</button>
+                            <p *ngIf = "errorBorrowed[ind] === 'true'" class = "text-danger" >You cannot extend the borrow for more than once!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br><br>

@@ -1,0 +1,12 @@
+.center{
+    display: flex;
+    justify-content: center;
+}
+.m100{
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.firstContainer{
+    background-color: lightsalmon;
+ }

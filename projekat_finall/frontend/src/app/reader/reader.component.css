@@ -1,0 +1,14 @@
+
+.centar{
+    display: flex;
+    justify-content: center;
+}
+
+.m100{
+    max-height: 100px;
+    max-width: 100px;
+}
+.over {
+    white-space: nowrap;
+}
+
